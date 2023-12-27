@@ -24,6 +24,10 @@ def main():
         print("Error | Unable to find source directory, or option is empty.")
         error_count += 1
 
+    if not json_data["output_dir"] or json_data["output_dir"] == "":
+        print("Error | Unable to output directory is empty.")
+        error_count += 1
+
     if not str(json_data["subfolder_amount"]).isnumeric() or json_data["subfolder_amount"] < 2:
         print("Error | Sub-folder amount must be a number and greater than 1.")
         error_count += 1
@@ -49,6 +53,7 @@ def main():
 
         debug_mode = json_data["debug_mode"]
         source_folder = json_data["source_dir"]
+        output_folder = json_data["output_dir"]
         num_subfolders = json_data["subfolder_amount"]
         subfolders_name = json_data["subfolder_name"]
 
@@ -70,8 +75,12 @@ def main():
 
         print(f"Folder Splitter | Amount Of Files: {len(files)} | Amount Per Sub-Folder: {files_per_subfolder}")
 
+        if not os.path.exists(output_folder):
+            os.mkdir(output_folder)
+            print(f"Folder Splitter | Created output folder: {output_folder}")
+
         # Create the sub-folders
-        subfolders = [os.path.join(source_folder, f"{subfolders_name}_{i + 1}") for i in range(num_subfolders)]
+        subfolders = [os.path.join(output_folder, f"{subfolders_name}_{i + 1}") for i in range(num_subfolders)]
         for subfolder in subfolders:
             os.makedirs(subfolder, exist_ok=True)
             if debug_mode:
