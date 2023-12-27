@@ -1,6 +1,7 @@
 {
   "debug_mode": false,
   "source_dir": "Before",
+  "output_dir": "After",
   "subfolder_amount": 2,
   "subfolder_name": "subfolder"
 }
