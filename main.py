@@ -16,7 +16,7 @@ def main():
         json_data = json.load(f)
 
     error_count = 0
-    if not json_data["debug_mode"] == True and not json_data["debug_mode"] == False:
+    if json_data["debug_mode"] != True or json_data["debug_mode"] != False:
         print("Error | Unable to load debug status from settings.json")
         error_count += 1
 
